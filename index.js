@@ -27,19 +27,18 @@ server.listen(port, hostname, () => {
             text: "fileName",
             attachments: [
                 {
-                    content: buffer,
-                    filename: "fileName",
-                    type: "application/pdf"
-                }
+                    content: buffer.toString('base64'),
+                    filename: 'fileName.pdf',
+                    type: 'application/pdf'                }
             ]
         };
 
-        console.log(msg);
+        // console.log(msg);
 
         sendGrid
             .send(msg)
             .then(() => { console.log('Email sent!') })
             .catch(err => { console.log('Error sending email', err) });
-    })
-        .catch(err => { console.log('Error getting buffer', err) })
+
+    }).catch(err => { console.log('Error getting buffer', err) })
 });
